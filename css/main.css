@@ -1,0 +1,16 @@
+.phone-bg{
+    background-image: url(../images/iphone.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+
+ul::-webkit-scrollbar {
+  display: none;
+}
+
+ul{
+  -ms-overflow-style: none;  
+  scrollbar-width: none; 
+}
