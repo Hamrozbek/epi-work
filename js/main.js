@@ -23,18 +23,18 @@ function renderUsers(usersList, saveList){
     saveList.innerHTML = null
     usersList.forEach(item => {
         let elItem = document.createElement("li")
-        elItem.className = "flex justify-between cursor-pointer items-center bg-slate-100 p-1 rounded-md"
+        elItem.className = "flex justify-between cursor-pointer items-center bg-slate-100 p-3 rounded-md"
         elItem.innerHTML = `
-            <div class="flex items-center gap-[10px]">
-                <img class="w-[65px] h-[65px] rounded-full" src="./images/iphone.png" alt="user img" width="65"
+            <div class="flex items-center gap-[5px] justify-between">
+                <img class="w-[70px] h-[70px] rounded-full" src="./images/iphone.png" alt="user img" width="65"
                     height="65">
                 <div>
-                    <h2 class="font-semibold text-[18px]">${item.name} (${item.username})</h2>
-                    <p class="text-[16px]">${item.email}</p>
+                    <h2 class="font-semibold text-[15px]">${item.name} (${item.username})</h2>
+                    <p class="text-[12px]">${item.email}</p>
                 </div>
             </div>
             <button class="cursor-pointer">
-                <img src="./images/dots.svg" alt="dots img" width="25" height="25">
+                <img src="./images/dots.svg" alt="dots img" width="20" height="20">
             </button>
         `
         saveList.appendChild(elItem)
@@ -48,9 +48,9 @@ function renderUsers(usersList, saveList){
 getUsers("https://jsonplaceholder.typicode.com/users")
 // users part and 
 
-
 // post part start 
 function getPostById(id){
+    Loading(elPsotList)
     fetch(`https://jsonplaceholder.typicode.com/posts?userId=${id}`).then(res => res.json()).then(data => {
         renderPosts(data, elPsotList)
     })
@@ -60,7 +60,7 @@ function renderPosts(postsList, saveList){
     saveList.innerHTML = null
     postsList.forEach(item => {
         let elItem = document.createElement("li")
-        elItem.className = "bg-[#3770a7] rounded-t-[15px] rounded-br-[15px] text-[18px] text-white p-3"   
+        elItem.className = "bg-[#3770a7] cursor-pointer rounded-t-[15px] rounded-br-[15px] text-[18px] text-white p-3"   
         elItem.innerHTML = `
             <div class="flex justify-between items-center">
                 <strong>#${item.userId}</strong>
@@ -70,6 +70,38 @@ function renderPosts(postsList, saveList){
             <p>${item.body}</p>
         `   
         saveList.appendChild(elItem)
+
+        elItem.addEventListener("click", () => {
+            getCommintById(item.id)
+            Loading(elCommentList)
+        })
     })
 }
 // post part and 
+
+// Comment part start 
+function getCommintById(id){
+    // Loading(elCommentList)
+    fetch(`https://jsonplaceholder.typicode.com/comments?postId=${id}`).then(res => res.json()).then(data => {
+        renderCommints(data, elCommentList)
+    })
+}
+
+function renderCommints(commintList, saveList){
+    saveList.innerHTML = null
+    commintList.forEach(item => {
+        let elItem = document.createElement("li")
+        elItem.className = "bg-[#555555] rounded-t-[15px] rounded-bl-[15px] text-[18px] text-white p-3"   
+        elItem.innerHTML = `
+            <div class="flex justify-between items-center">
+                <strong>#${item.postId}</strong>
+                <span>ID:${item.id}</span>
+            </div>
+            <h3 class="font-bold">${item.name}</h3>
+            <p class="italic">${item.email}</p>
+            <p class="text-[15px]">${item.body}</p>
+        `   
+        saveList.appendChild(elItem)
+    })
+}
+// Comment part and 
