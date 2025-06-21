@@ -26,7 +26,7 @@ function renderUsers(usersList, saveList){
         elItem.className = "flex justify-between cursor-pointer items-center bg-slate-100 p-3 rounded-md"
         elItem.innerHTML = `
             <div class="flex items-center gap-[5px] justify-between">
-                <img class="w-[70px] h-[70px] rounded-full" src="./images/iphone.png" alt="user img" width="65"
+                <img class="w-[70px] h-[70px] rounded-full" src="${item.url}" alt="user img" width="65"
                     height="65">
                 <div>
                     <h2 class="font-semibold text-[15px]">${item.name} (${item.username})</h2>
