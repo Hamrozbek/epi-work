@@ -1,5 +1,5 @@
 let elUsersList = document.querySelector(".users-list")
-let elPsotList = document.querySelector(".posts-list")
+let elPostList = document.querySelector(".posts-list")
 let elCommentList = document.querySelector(".comments-list")
 
 // loading fn 
@@ -41,7 +41,7 @@ function renderUsers(usersList, saveList){
 
         elItem.addEventListener("click", () => {
             getPostById(item.id)
-            Loading(elPsotList)
+            Loading(elPostList)
         })
     })
 }
@@ -50,9 +50,9 @@ getUsers("https://jsonplaceholder.typicode.com/users")
 
 // post part start 
 function getPostById(id){
-    Loading(elPsotList)
+    Loading(elPostList)
     fetch(`https://jsonplaceholder.typicode.com/posts?userId=${id}`).then(res => res.json()).then(data => {
-        renderPosts(data, elPsotList)
+        renderPosts(data, elPostList)
     })
 }
 
@@ -81,7 +81,6 @@ function renderPosts(postsList, saveList){
 
 // Comment part start 
 function getCommintById(id){
-    // Loading(elCommentList)
     fetch(`https://jsonplaceholder.typicode.com/comments?postId=${id}`).then(res => res.json()).then(data => {
         renderCommints(data, elCommentList)
     })
